@@ -6,8 +6,8 @@ import dev.toastcie.customcraft.screen.MainFrame;
 
 public class CameraManager {
     private static CameraManager instance;
-    public int tileWidth = 32;
-    public int tileHeight = 32;
+    public int tileWidth = 48;
+    public int tileHeight = 48;
     private PlayerCamera playercamera;
 
     private int cameraX;
