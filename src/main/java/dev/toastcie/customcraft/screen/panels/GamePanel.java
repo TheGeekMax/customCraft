@@ -10,6 +10,7 @@ import dev.toastcie.customcraft.math.Vector2Int;
 import dev.toastcie.customcraft.screen.camera.CameraManager;
 import dev.toastcie.customcraft.screen.camera.PlayerCamera;
 import dev.toastcie.customcraft.tile.BaseTile;
+import dev.toastcie.customcraft.tile.TileAtlas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +21,7 @@ public class GamePanel implements ILoopPanel {
     private CameraManager cameraManager;
     private PlayerCamera playerCamera;
     private Keyboard keyboard;
-    private int speed = 5;
+    private int speed = 10;
 
     public GamePanel() {
         this.cameraManager = CameraManager.getInstance();
@@ -48,10 +49,11 @@ public class GamePanel implements ILoopPanel {
         int endY = view.getY() + view.getHeight();
         for (int i = beginX - 1; i <= endX; i++) {
             for (int j = beginY - 1; j <= endY; j++) {
-                BaseTile tile = level.getBackgroundTile(i, j);
+                BaseTile bgtile = level.getBackgroundTile(i, j);
+                BaseTile tile = level.getTile(i, j);
                 Vector2<Integer> canvasPos = cameraManager.CameraToCanvas(i, j);
-                if (tile != null) {
-                    g.drawImage(tile.getImage(level, i, j), canvasPos.getX(), canvasPos.getY(), tileWidth, tileHeight, null);
+                if (bgtile != null) {
+                    g.drawImage(bgtile.getImage(level, i, j), canvasPos.getX(), canvasPos.getY(), tileWidth, tileHeight, null);
                 } else {
                     //draw checkerboard
                     if ((i + j) % 2 == 0) {
@@ -61,8 +63,18 @@ public class GamePanel implements ILoopPanel {
                     }
                     g.fillRect(canvasPos.getX(), canvasPos.getY(), tileWidth, tileHeight);
                 }
+                if (tile != null) {
+                    g.drawImage(tile.getImage(level, i, j), canvasPos.getX(), canvasPos.getY(), tileWidth, tileHeight, null);
+                }
             }
         }
+    }
+
+    @Override
+    public void onClick(int mouseX, int mouseY) {
+        Vector2<Float> canvasPos = cameraManager.CanvasToCamera(mouseX, mouseY);
+        Vector2Int tilePos = new Vector2Int(canvasPos.getX().intValue(), canvasPos.getY().intValue());
+        level.setTile(tilePos.getX(), tilePos.getY(), TileAtlas.TREE_TILE);
     }
 
 

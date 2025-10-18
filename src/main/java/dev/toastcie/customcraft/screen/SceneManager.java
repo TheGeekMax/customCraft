@@ -42,4 +42,10 @@ class SceneManager {
             currentScene.paint(g, panel);
         }
     }
+
+    public void onClick(int x, int y) {
+        if (currentScene != null) {
+            currentScene.onClick(x, y);
+        }
+    }
 }

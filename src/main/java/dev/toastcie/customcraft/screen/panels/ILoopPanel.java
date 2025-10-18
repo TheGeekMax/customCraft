@@ -7,4 +7,6 @@ public interface ILoopPanel {
     void loop();
 
     void paint(Graphics g, JPanel panel);
+
+    void onClick(int mouseX, int mouseY);
 }

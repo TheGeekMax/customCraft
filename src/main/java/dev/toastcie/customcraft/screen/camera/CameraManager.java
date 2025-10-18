@@ -71,6 +71,5 @@ public class CameraManager {
         int bottom = (cameraY + MainFrame.instance.screenHeight) / tileHeight;
         return new Rect<>(left, top, right - left, bottom - top);
     }
-
-
+    
 }

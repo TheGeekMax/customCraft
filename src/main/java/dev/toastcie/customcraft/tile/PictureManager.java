@@ -62,5 +62,14 @@ public class PictureManager {
         addImage("grass_3", 24, 0, 8, 8);
 
         addImage("flower", 8, 8, 8, 8);
+
+        //tree
+        addImage("tree_none_top_left", 72, 0, 8, 8);
+        addImage("tree_none_top_right", 80, 0, 8, 8);
+        addImage("tree_none_bottom_left", 72, 8, 8, 8);
+        addImage("tree_none_bottom_right", 80, 24, 8, 8);
+
+        addImage("tree_connected_tl_br", 80, 8, 8, 8);
+        addImage("tree_connected_tr_bl", 80, 16, 8, 8);
     }
 }

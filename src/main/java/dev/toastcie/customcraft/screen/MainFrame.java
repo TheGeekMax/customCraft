@@ -6,10 +6,7 @@ import dev.toastcie.customcraft.screen.panels.GamePanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class MainFrame extends JFrame {
     public static MainFrame instance;
@@ -62,6 +59,21 @@ public class MainFrame extends JFrame {
             public void componentResized(ComponentEvent evt) {
                 screenWidth = getContentPane().getWidth();
                 screenHeight = getContentPane().getHeight();
+            }
+        });
+
+        //click detection
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (sceneManager != null) {
+                    //get mouse position relative to content panel
+                    Point point = e.getPoint();
+                    Insets insets = getInsets();
+                    int mouseX = point.x - insets.left;
+                    int mouseY = point.y - insets.top;
+                    sceneManager.onClick(mouseX, mouseY);
+                }
             }
         });
 
