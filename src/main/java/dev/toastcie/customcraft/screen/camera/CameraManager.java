@@ -1,13 +1,12 @@
 package dev.toastcie.customcraft.screen.camera;
 
+import dev.toastcie.customcraft.data.GlobalData;
 import dev.toastcie.customcraft.math.Rect;
 import dev.toastcie.customcraft.math.Vector2;
 import dev.toastcie.customcraft.screen.MainFrame;
 
 public class CameraManager {
     private static CameraManager instance;
-    public int tileWidth = 48;
-    public int tileHeight = 48;
     private PlayerCamera playercamera;
 
     private int cameraX;
@@ -57,19 +56,19 @@ public class CameraManager {
 
 
     public Vector2<Float> CanvasToCamera(int x, int y) {
-        return new Vector2<>((x + cameraX * 1.0f) / tileWidth, (y + cameraY * 1.0f) / tileHeight);
+        return new Vector2<>((x + cameraX * 1.0f) / GlobalData.tileWidth, (y + cameraY * 1.0f) / GlobalData.tileWidth);
     }
 
     public Vector2<Integer> CameraToCanvas(int x, int y) {
-        return new Vector2<>(x * tileWidth - cameraX, y * tileHeight - cameraY);
+        return new Vector2<>(x * GlobalData.tileWidth - cameraX, y * GlobalData.tileWidth - cameraY);
     }
 
     public Rect<Integer> getCameraGridRect() {
-        int left = cameraX / tileWidth;
-        int top = cameraY / tileHeight;
-        int right = (cameraX + MainFrame.instance.screenWidth) / tileWidth;
-        int bottom = (cameraY + MainFrame.instance.screenHeight) / tileHeight;
+        int left = cameraX / GlobalData.tileWidth;
+        int top = cameraY / GlobalData.tileWidth;
+        int right = (cameraX + MainFrame.instance.screenWidth) / GlobalData.tileWidth;
+        int bottom = (cameraY + MainFrame.instance.screenHeight) / GlobalData.tileWidth;
         return new Rect<>(left, top, right - left, bottom - top);
     }
-    
+
 }

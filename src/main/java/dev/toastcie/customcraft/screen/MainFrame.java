@@ -98,7 +98,7 @@ public class MainFrame extends JFrame {
         sceneManager.setActiveScene("GAME");
 
         //start game loop timer
-        Timer timer = new Timer(16, e -> {
+        Timer timer = new Timer(1000 / 40, e -> {
             sceneManager.gameLoop();
             contentPanel.repaint();
         });

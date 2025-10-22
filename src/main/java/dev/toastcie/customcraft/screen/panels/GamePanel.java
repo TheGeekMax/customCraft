@@ -1,5 +1,6 @@
 package dev.toastcie.customcraft.screen.panels;
 
+import dev.toastcie.customcraft.data.GlobalData;
 import dev.toastcie.customcraft.keyevents.Keyboard;
 import dev.toastcie.customcraft.level.Generator;
 import dev.toastcie.customcraft.level.Level;
@@ -40,20 +41,23 @@ public class GamePanel implements ILoopPanel {
         Rect<Integer> view = cameraManager.getCameraGridRect();
 
         //checkerboard background
-        int tileWidth = cameraManager.tileWidth;
-        int tileHeight = cameraManager.tileHeight;
+        int tileWidth = GlobalData.tileWidth;
+        int tileHeight = GlobalData.tileWidth;
 
         int beginX = view.getX();
         int beginY = view.getY();
         int endX = view.getX() + view.getWidth();
         int endY = view.getY() + view.getHeight();
+
+        int hwidth = tileWidth / 2;
+        int hheight = tileHeight / 2;
         for (int i = beginX - 1; i <= endX; i++) {
             for (int j = beginY - 1; j <= endY; j++) {
                 BaseTile bgtile = level.getBackgroundTile(i, j);
                 BaseTile tile = level.getTile(i, j);
                 Vector2<Integer> canvasPos = cameraManager.CameraToCanvas(i, j);
                 if (bgtile != null) {
-                    g.drawImage(bgtile.getImage(level, i, j), canvasPos.getX(), canvasPos.getY(), tileWidth, tileHeight, null);
+                    bgtile.place(g, level, canvasPos.getX(), canvasPos.getY(), i, j);
                 } else {
                     //draw checkerboard
                     if ((i + j) % 2 == 0) {
@@ -64,7 +68,7 @@ public class GamePanel implements ILoopPanel {
                     g.fillRect(canvasPos.getX(), canvasPos.getY(), tileWidth, tileHeight);
                 }
                 if (tile != null) {
-                    g.drawImage(tile.getImage(level, i, j), canvasPos.getX(), canvasPos.getY(), tileWidth, tileHeight, null);
+                    tile.place(g, level, canvasPos.getX(), canvasPos.getY(), i, j);
                 }
             }
         }

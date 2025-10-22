@@ -16,6 +16,7 @@ public class Superflat extends Generator {
             }
         }
 
+        //TODO supprimer
         BaseTile G = TileAtlas.GRASS_TILE;
         BaseTile F = TileAtlas.FLOWER_TILE;
         BaseTile T = TileAtlas.TREE_TILE;

@@ -2,7 +2,6 @@ package dev.toastcie.customcraft.tile.rules;
 
 import dev.toastcie.customcraft.level.Level;
 import dev.toastcie.customcraft.math.Vector4;
-import dev.toastcie.customcraft.tile.PictureManager;
 import dev.toastcie.customcraft.utils.SortedList;
 
 import java.awt.image.BufferedImage;
@@ -12,7 +11,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class TileRules {
-    public Map<Vector4<Integer>, BufferedImage> cachedImages = new TreeMap<>();
+    public Map<Vector4<Integer>, Vector4<BufferedImage>> cachedImages = new TreeMap<>();
     private List<TileRule> topLeftRules;
     private List<TileRule> topRightRules;
     private List<TileRule> bottomLeftRules;
@@ -41,7 +40,7 @@ public class TileRules {
 
     public static TileRules treeRulesBuilder(
             String TreeId,
-            
+
             BufferedImage defaultTopLeft,
             BufferedImage defaultTopRight,
             BufferedImage defaultBottomLeft,
@@ -86,7 +85,7 @@ public class TileRules {
         return this;
     }
 
-    public BufferedImage getFullImage(Level level, int x, int y) {
+    public Vector4<BufferedImage> getFullImage(Level level, int x, int y) {
         int topLeft = -1;
         int topRight = -1;
         int bottomLeft = -1;
@@ -136,8 +135,7 @@ public class TileRules {
                         BufferedImage bottomLeft = (k == -1) ? defaultBottomLeft : bottomLeftRules.get(k).getImage();
                         BufferedImage bottomRight = (l == -1) ? defaultBottomRight : bottomRightRules.get(l).getImage();
 
-                        BufferedImage fullImage = PictureManager.reconstructImage(topLeft, topRight, bottomLeft, bottomRight);
-                        cachedImages.put(key, fullImage);
+                        cachedImages.put(key, new Vector4<>(topLeft, topRight, bottomLeft, bottomRight));
                     }
                 }
             }

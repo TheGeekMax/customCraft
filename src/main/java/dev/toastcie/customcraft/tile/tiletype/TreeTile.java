@@ -8,7 +8,6 @@ public class TreeTile extends ConnectedTile {
     public TreeTile() {
         super(
                 "tree",
-                null,
                 TileRules.treeRulesBuilder(
                         "tree",
                         PictureManager.instance.getImage("tree_none_top_left"),
