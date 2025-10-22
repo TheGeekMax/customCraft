@@ -2,30 +2,30 @@ package dev.toastcie.customcraft.tile.rules;
 
 import dev.toastcie.customcraft.level.Level;
 import dev.toastcie.customcraft.math.Vector4;
+import dev.toastcie.customcraft.tile.sprites.ISprite;
 import dev.toastcie.customcraft.utils.SortedList;
 
-import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class TileRules {
-    public Map<Vector4<Integer>, Vector4<BufferedImage>> cachedImages = new TreeMap<>();
+    public Map<Vector4<Integer>, Vector4<ISprite>> cachedImages = new TreeMap<>();
     private List<TileRule> topLeftRules;
     private List<TileRule> topRightRules;
     private List<TileRule> bottomLeftRules;
     private List<TileRule> bottomRightRules;
-    private BufferedImage defaultTopLeft;
-    private BufferedImage defaultTopRight;
-    private BufferedImage defaultBottomLeft;
-    private BufferedImage defaultBottomRight;
+    private ISprite defaultTopLeft;
+    private ISprite defaultTopRight;
+    private ISprite defaultBottomLeft;
+    private ISprite defaultBottomRight;
 
     public TileRules(
-            BufferedImage defaultTopLeft,
-            BufferedImage defaultTopRight,
-            BufferedImage defaultBottomLeft,
-            BufferedImage defaultBottomRight
+            ISprite defaultTopLeft,
+            ISprite defaultTopRight,
+            ISprite defaultBottomLeft,
+            ISprite defaultBottomRight
     ) {
         this.topLeftRules = new SortedList<>();
         this.topRightRules = new SortedList<>();
@@ -41,15 +41,15 @@ public class TileRules {
     public static TileRules treeRulesBuilder(
             String TreeId,
 
-            BufferedImage defaultTopLeft,
-            BufferedImage defaultTopRight,
-            BufferedImage defaultBottomLeft,
-            BufferedImage defaultBottomRight,
+            ISprite defaultTopLeft,
+            ISprite defaultTopRight,
+            ISprite defaultBottomLeft,
+            ISprite defaultBottomRight,
 
-            BufferedImage linkedTopLeft,
-            BufferedImage linkedTopRight,
-            BufferedImage linkedBottomLeft,
-            BufferedImage linkedBottomRight
+            ISprite linkedTopLeft,
+            ISprite linkedTopRight,
+            ISprite linkedBottomLeft,
+            ISprite linkedBottomRight
     ) {
         TileRules treeRules = new TileRules(
                 defaultTopLeft,
@@ -85,7 +85,7 @@ public class TileRules {
         return this;
     }
 
-    public Vector4<BufferedImage> getFullImage(Level level, int x, int y) {
+    public Vector4<ISprite> getFullImage(Level level, int x, int y) {
         int topLeft = -1;
         int topRight = -1;
         int bottomLeft = -1;
@@ -130,10 +130,10 @@ public class TileRules {
                     for (int l = -1; l < bottomRightRules.size(); l++) {
                         Vector4<Integer> key = new Vector4<>(i, j, k, l);
 
-                        BufferedImage topLeft = (i == -1) ? defaultTopLeft : topLeftRules.get(i).getImage();
-                        BufferedImage topRight = (j == -1) ? defaultTopRight : topRightRules.get(j).getImage();
-                        BufferedImage bottomLeft = (k == -1) ? defaultBottomLeft : bottomLeftRules.get(k).getImage();
-                        BufferedImage bottomRight = (l == -1) ? defaultBottomRight : bottomRightRules.get(l).getImage();
+                        ISprite topLeft = (i == -1) ? defaultTopLeft : topLeftRules.get(i).getImage();
+                        ISprite topRight = (j == -1) ? defaultTopRight : topRightRules.get(j).getImage();
+                        ISprite bottomLeft = (k == -1) ? defaultBottomLeft : bottomLeftRules.get(k).getImage();
+                        ISprite bottomRight = (l == -1) ? defaultBottomRight : bottomRightRules.get(l).getImage();
 
                         cachedImages.put(key, new Vector4<>(topLeft, topRight, bottomLeft, bottomRight));
                     }

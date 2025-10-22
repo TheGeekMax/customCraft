@@ -1,6 +1,7 @@
 package dev.toastcie.customcraft.screen;
 
 
+import dev.toastcie.customcraft.data.GlobalData;
 import dev.toastcie.customcraft.keyevents.Keyboard;
 import dev.toastcie.customcraft.screen.panels.GamePanel;
 
@@ -98,9 +99,10 @@ public class MainFrame extends JFrame {
         sceneManager.setActiveScene("GAME");
 
         //start game loop timer
-        Timer timer = new Timer(1000 / 40, e -> {
+        Timer timer = new Timer(1000 / 60, e -> {
             sceneManager.gameLoop();
             contentPanel.repaint();
+            GlobalData.updateTimer();
         });
         timer.start();
     }

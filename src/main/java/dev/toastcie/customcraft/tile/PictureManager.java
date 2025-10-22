@@ -1,5 +1,10 @@
 package dev.toastcie.customcraft.tile;
 
+import dev.toastcie.customcraft.math.Rect;
+import dev.toastcie.customcraft.tile.sprites.AnimatedSprite;
+import dev.toastcie.customcraft.tile.sprites.ISprite;
+import dev.toastcie.customcraft.tile.sprites.StaticSprite;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -11,7 +16,7 @@ public class PictureManager {
     public static PictureManager instance;
 
     BufferedImage mainImage;
-    Map<String, BufferedImage> images = new HashMap<>();
+    Map<String, ISprite> images = new HashMap<>();
 
     private PictureManager(InputStream stream) throws IOException {
         if (instance != null) {
@@ -45,31 +50,45 @@ public class PictureManager {
         return combined;
     }
 
-    public BufferedImage getImage(String name) {
+    public ISprite getImage(String name) {
         return images.get(name);
     }
 
-    private void addImage(String name, int x, int y, int width, int height) {
-        BufferedImage img = mainImage.getSubimage(x, y, width, height);
-        images.put(name, img);
+    private void addStaticImage(String name, Rect<Integer> rect) {
+        BufferedImage img = mainImage.getSubimage(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+        images.put(name, new StaticSprite(img));
+    }
+
+    private void addAnimatedImage(String name, int timePerFrame, Rect<Integer>... rect) {
+        BufferedImage[] frames = new BufferedImage[rect.length];
+        for (int i = 0; i < rect.length; i++) {
+            Rect<Integer> r = rect[i];
+            frames[i] = mainImage.getSubimage(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+        }
+        images.put(name, new AnimatedSprite(timePerFrame, frames));
     }
 
     private void initializePictures() {
         //basic tiles
-        addImage("grass_0", 0, 0, 8, 8);
-        addImage("grass_1", 8, 0, 8, 8);
-        addImage("grass_2", 16, 0, 8, 8);
-        addImage("grass_3", 24, 0, 8, 8);
+        addStaticImage("grass_0", new Rect<>(0, 0, 8, 8));
+        addStaticImage("grass_1", new Rect<>(8, 0, 8, 8));
+        addStaticImage("grass_2", new Rect<>(16, 0, 8, 8));
+        addStaticImage("grass_3", new Rect<>(24, 0, 8, 8));
+        addAnimatedImage("grass_4", 10,
+                new Rect<>(0, 0, 8, 8),
+                new Rect<>(8, 0, 8, 8),
+                new Rect<>(16, 0, 8, 8),
+                new Rect<>(24, 0, 8, 8));
 
-        addImage("flower", 8, 8, 8, 8);
+        addStaticImage("flower", new Rect<>(8, 8, 8, 8));
 
         //tree
-        addImage("tree_none_top_left", 72, 0, 8, 8);
-        addImage("tree_none_top_right", 80, 0, 8, 8);
-        addImage("tree_none_bottom_left", 72, 8, 8, 8);
-        addImage("tree_none_bottom_right", 80, 24, 8, 8);
+        addStaticImage("tree_none_top_left", new Rect<>(72, 0, 8, 8));
+        addStaticImage("tree_none_top_right", new Rect<>(80, 0, 8, 8));
+        addStaticImage("tree_none_bottom_left", new Rect<>(72, 8, 8, 8));
+        addStaticImage("tree_none_bottom_right", new Rect<>(80, 24, 8, 8));
 
-        addImage("tree_connected_tl_br", 80, 8, 8, 8);
-        addImage("tree_connected_tr_bl", 80, 16, 8, 8);
+        addStaticImage("tree_connected_tl_br", new Rect<>(80, 8, 8, 8));
+        addStaticImage("tree_connected_tr_bl", new Rect<>(80, 16, 8, 8));
     }
 }

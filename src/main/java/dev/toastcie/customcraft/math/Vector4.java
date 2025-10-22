@@ -26,4 +26,21 @@ public class Vector4<T> implements Comparable<Vector4<T>> {
         if (cmpZ != 0) return cmpZ;
         return ((Comparable<T>) this.w).compareTo(tVector4.w);
     }
+
+    public <R> Vector4<R> map(Function4<T, R> func) {
+        return new Vector4<>(
+                func.apply(this.x),
+                func.apply(this.y),
+                func.apply(this.z),
+                func.apply(this.w)
+        );
+    }
+
+    public <R> R reduce(Function4<Vector4<T>, R> func) {
+        return func.apply(this);
+    }
+
+    public interface Function4<T, R> {
+        R apply(T t);
+    }
 }

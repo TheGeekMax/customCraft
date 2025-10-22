@@ -2,12 +2,11 @@ package dev.toastcie.customcraft.tile.rules;
 
 import dev.toastcie.customcraft.level.Level;
 import dev.toastcie.customcraft.tile.BaseTile;
-
-import java.awt.image.BufferedImage;
+import dev.toastcie.customcraft.tile.sprites.ISprite;
 
 public class TileRule implements Comparable<TileRule> {
     int weight;
-    BufferedImage image;
+    ISprite image;
 
     /**
      * binary code representing the neighboring tiles configuration
@@ -28,7 +27,7 @@ public class TileRule implements Comparable<TileRule> {
      */
     boolean fg;
 
-    public TileRule(BufferedImage image, int binaryCode, String tileId, int weight, boolean fg) {
+    public TileRule(ISprite image, int binaryCode, String tileId, int weight, boolean fg) {
         this.weight = weight;
         this.image = image;
         this.binaryCode = binaryCode;
@@ -36,7 +35,7 @@ public class TileRule implements Comparable<TileRule> {
         this.fg = fg;
     }
 
-    public static TileRule builder(BufferedImage image, int binaryCode, String tileId, int weight, boolean fg) {
+    public static TileRule builder(ISprite image, int binaryCode, String tileId, int weight, boolean fg) {
         return new TileRule(image, binaryCode, tileId, weight, fg);
     }
 
@@ -44,7 +43,7 @@ public class TileRule implements Comparable<TileRule> {
         return weight;
     }
 
-    public BufferedImage getImage() {
+    public ISprite getImage() {
         return image;
     }
 

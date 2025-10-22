@@ -4,6 +4,7 @@ import dev.toastcie.customcraft.data.GlobalData;
 import dev.toastcie.customcraft.level.Level;
 import dev.toastcie.customcraft.math.Vector4;
 import dev.toastcie.customcraft.tile.rules.TileRules;
+import dev.toastcie.customcraft.tile.sprites.ISprite;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -18,7 +19,7 @@ public abstract class ConnectedTile extends BaseTile {
 
     @Override
     protected Vector4<BufferedImage> getImage(Level level, int x, int y) {
-        return rules.getFullImage(level, x, y);
+        return rules.getFullImage(level, x, y).map(ISprite::getSprite);
     }
 
     @Override
