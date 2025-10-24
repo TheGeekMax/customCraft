@@ -38,6 +38,68 @@ public class TileRules {
         this.defaultBottomRight = defaultBottomRight;
     }
 
+    public static TileRules basicConnectedRules(
+            String connectedId,
+
+            ISprite defaultTopLeft,
+            ISprite defaultTopRight,
+            ISprite defaultBottomLeft,
+            ISprite defaultBottomRight,
+
+            // side sprites
+            ISprite linkedTop,
+            ISprite linkedRight,
+            ISprite linkedBottom,
+            ISprite linkedLeft,
+
+            // corner sprites
+            ISprite linkedTopLeft,
+            ISprite linkedTopRight,
+            ISprite linkedBottomRight,
+            ISprite linkedBottomLeft,
+
+            ISprite flat,
+
+            boolean fg
+    ) {
+        TileRules connectedRules = new TileRules(
+                linkedTopLeft,
+                linkedTopRight,
+                linkedBottomLeft,
+                linkedBottomRight);
+
+        // Top Left
+        connectedRules
+                .addTopLeftRule(TileRule.builder(defaultTopLeft, 0b000_001_011, connectedId, 13, fg))
+                .addTopLeftRule(TileRule.builder(flat, 0b000_001_010, connectedId, 11, fg))
+                .addTopLeftRule(TileRule.builder(linkedTop, 0b000_001_000, connectedId, 7, fg))
+                .addTopLeftRule(TileRule.builder(linkedLeft, 0b000_000_010, connectedId, 5, fg));
+
+        // Top Right
+        connectedRules
+                .addTopRightRule(TileRule.builder(defaultTopRight, 0b000_100_110, connectedId, 13, fg))
+                .addTopRightRule(TileRule.builder(flat, 0b000_100_010, connectedId, 11, fg))
+                .addTopRightRule(TileRule.builder(linkedTop, 0b000_100_000, connectedId, 7, fg))
+                .addTopRightRule(TileRule.builder(linkedRight, 0b000_000_010, connectedId, 5, fg));
+
+        // Bottom Left
+        connectedRules
+                .addBottomLeftRule(TileRule.builder(defaultBottomLeft, 0b011_001_000, connectedId, 13, fg))
+                .addBottomLeftRule(TileRule.builder(flat, 0b010_001_000, connectedId, 11, fg))
+                .addBottomLeftRule(TileRule.builder(linkedLeft, 0b010_000_000, connectedId, 7, fg))
+                .addBottomLeftRule(TileRule.builder(linkedBottom, 0b000_001_000, connectedId, 5, fg));
+
+        // Bottom Right
+        connectedRules
+                .addBottomRightRule(TileRule.builder(defaultBottomRight, 0b110_100_000, connectedId, 13, fg))
+                .addBottomRightRule(TileRule.builder(flat, 0b010_100_000, connectedId, 11, fg))
+                .addBottomRightRule(TileRule.builder(linkedRight, 0b010_000_000, connectedId, 7, fg))
+                .addBottomRightRule(TileRule.builder(linkedBottom, 0b000_100_000, connectedId, 5, fg));
+
+
+        return connectedRules.build();
+    }
+
     public static TileRules treeRulesBuilder(
             String TreeId,
 
@@ -64,6 +126,7 @@ public class TileRules {
 
         return treeRules.build();
     }
+
 
     public TileRules addTopLeftRule(TileRule... rules) {
         this.topLeftRules.addAll(Arrays.asList(rules));

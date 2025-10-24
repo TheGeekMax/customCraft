@@ -74,11 +74,15 @@ public class PictureManager {
         addStaticImage("grass_1", new Rect<>(8, 0, 8, 8));
         addStaticImage("grass_2", new Rect<>(16, 0, 8, 8));
         addStaticImage("grass_3", new Rect<>(24, 0, 8, 8));
-        addAnimatedImage("grass_4", 10,
-                new Rect<>(0, 0, 8, 8),
-                new Rect<>(8, 0, 8, 8),
-                new Rect<>(16, 0, 8, 8),
-                new Rect<>(24, 0, 8, 8));
+
+        addStaticImage("grass_tl", new Rect<>(88, 0, 8, 8));
+        addStaticImage("grass_t", new Rect<>(96, 0, 8, 8));
+        addStaticImage("grass_tr", new Rect<>(104, 0, 8, 8));
+        addStaticImage("grass_l", new Rect<>(88, 8, 8, 8));
+        addStaticImage("grass_r", new Rect<>(104, 8, 8, 8));
+        addStaticImage("grass_bl", new Rect<>(88, 16, 8, 8));
+        addStaticImage("grass_b", new Rect<>(96, 16, 8, 8));
+        addStaticImage("grass_br", new Rect<>(104, 16, 8, 8));
 
         addStaticImage("flower", new Rect<>(8, 8, 8, 8));
 
@@ -90,5 +94,28 @@ public class PictureManager {
 
         addStaticImage("tree_connected_tl_br", new Rect<>(80, 8, 8, 8));
         addStaticImage("tree_connected_tr_bl", new Rect<>(80, 16, 8, 8));
+
+        //water
+        addStaticImage("water_tl", new Rect<>(112, 0, 8, 8));
+        addStaticImage("water_t", new Rect<>(120, 0, 8, 8));
+        addStaticImage("water_tr", new Rect<>(128, 0, 8, 8));
+        addStaticImage("water_l", new Rect<>(112, 8, 8, 8));
+        addStaticImage("water_flat", new Rect<>(120, 8, 8, 8));
+        addStaticImage("water_r", new Rect<>(128, 8, 8, 8));
+        addStaticImage("water_bl", new Rect<>(112, 16, 8, 8));
+        addStaticImage("water_b", new Rect<>(120, 16, 8, 8));
+        addStaticImage("water_br", new Rect<>(128, 16, 8, 8));
+
+        addAnimatedImage("water_anim_0", 30,
+                new Rect<>(136, 0, 8, 8),
+                new Rect<>(152, 0, 8, 8),
+                new Rect<>(144, 0, 8, 8),
+                new Rect<>(160, 0, 8, 8));
+
+        addAnimatedImage("water_anim_1", 30,
+                new Rect<>(144, 0, 8, 8),
+                new Rect<>(160, 0, 8, 8),
+                new Rect<>(136, 0, 8, 8),
+                new Rect<>(152, 0, 8, 8));
     }
 }

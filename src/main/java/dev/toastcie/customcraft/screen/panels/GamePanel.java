@@ -78,7 +78,7 @@ public class GamePanel implements ILoopPanel {
     public void onClick(int mouseX, int mouseY) {
         Vector2<Float> canvasPos = cameraManager.CanvasToCamera(mouseX, mouseY);
         Vector2Int tilePos = new Vector2Int(canvasPos.getX().intValue(), canvasPos.getY().intValue());
-        level.setTile(tilePos.getX(), tilePos.getY(), TileAtlas.TREE_TILE);
+        level.setBackgroundTile(tilePos.getX(), tilePos.getY(), TileAtlas.WATER_TILE);
     }
 
 

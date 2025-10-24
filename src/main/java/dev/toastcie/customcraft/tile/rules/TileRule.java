@@ -12,8 +12,8 @@ public class TileRule implements Comparable<TileRule> {
      * binary code representing the neighboring tiles configuration
      * <p>
      * 0 1 2
-     * 3 X 4
-     * 5 6 7
+     * 3 X 5
+     * 6 7 8
      * </p>
      */
     int binaryCode;
@@ -48,6 +48,9 @@ public class TileRule implements Comparable<TileRule> {
     }
 
     private String getTileId(Level level, int x, int y) {
+        if (x < 0 || y < 0 || x >= level.getWidth() || y >= level.getHeight()) {
+            return "";
+        }
         BaseTile tile = fg ? level.getTile(x, y) : level.getBackgroundTile(x, y);
         return tile != null ? tile.getId() : "";
     }

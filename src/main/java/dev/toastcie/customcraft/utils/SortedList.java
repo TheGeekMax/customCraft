@@ -12,7 +12,7 @@ public class SortedList<E> extends AbstractList<E> {
     @Override
     public void add(int position, E e) {
         internalList.add(e);
-        Collections.sort(internalList, null);
+        internalList.sort(Collections.reverseOrder());
     }
 
     @Override
