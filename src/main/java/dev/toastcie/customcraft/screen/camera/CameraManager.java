@@ -1,9 +1,13 @@
 package dev.toastcie.customcraft.screen.camera;
 
 import dev.toastcie.customcraft.data.GlobalData;
+import dev.toastcie.customcraft.level.Level;
 import dev.toastcie.customcraft.math.Rect;
 import dev.toastcie.customcraft.math.Vector2;
 import dev.toastcie.customcraft.screen.MainFrame;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class CameraManager {
     private static CameraManager instance;
@@ -35,9 +39,26 @@ public class CameraManager {
     public void calculateCaemeraPosition() {
         if (playercamera == null) return;
 
-        //TODO calculate considering player position and screen size
-        cameraX = playercamera.getX();
-        cameraY = playercamera.getY();
+        Vector2<Integer> pos = new Vector2<>(playercamera.getX(), playercamera.getY());
+
+        //step 0, center on the player
+        int tempcameraX = pos.getX() - MainFrame.instance.screenWidth / 2 + playercamera.getHitboxWidth() / 2;
+        int tempcameraY = pos.getY() - MainFrame.instance.screenHeight / 2 + playercamera.getHitboxWidth() / 2;
+
+        //step 1, cap to prevent overflow on top left (0,0)
+        tempcameraX = max(0, tempcameraX);
+        tempcameraY = max(0, tempcameraY);
+
+        //step 2, cap to prevent overflow on bottom right
+        Level active = GlobalData.getActiveLevel();
+        Vector2<Integer> maxCoors = new Vector2<>(active.getWidth() * GlobalData.tileWidth - MainFrame.instance.screenWidth,
+                active.getHeight() * GlobalData.tileWidth - MainFrame.instance.screenHeight);
+        tempcameraX = min(tempcameraX, maxCoors.getX());
+        tempcameraY = min(tempcameraY, maxCoors.getY());
+
+        //set final position
+        cameraX = tempcameraX;
+        cameraY = tempcameraY;
     }
 
     public void setPosition(int x, int y) {
@@ -71,4 +92,7 @@ public class CameraManager {
         return new Rect<>(left, top, right - left, bottom - top);
     }
 
+    public Vector2<Integer> CameraToGrid(int x, int y) {
+        return new Vector2<>(x - cameraX, y - cameraY);
+    }
 }

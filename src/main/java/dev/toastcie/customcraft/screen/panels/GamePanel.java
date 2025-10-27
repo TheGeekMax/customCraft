@@ -4,7 +4,7 @@ import dev.toastcie.customcraft.data.GlobalData;
 import dev.toastcie.customcraft.keyevents.Keyboard;
 import dev.toastcie.customcraft.level.Generator;
 import dev.toastcie.customcraft.level.Level;
-import dev.toastcie.customcraft.level.generators.Superflat;
+import dev.toastcie.customcraft.level.generators.Checkerboard;
 import dev.toastcie.customcraft.math.Rect;
 import dev.toastcie.customcraft.math.Vector2;
 import dev.toastcie.customcraft.math.Vector2Int;
@@ -24,6 +24,7 @@ public class GamePanel implements ILoopPanel {
     private Keyboard keyboard;
     private int speed = 10;
 
+
     public GamePanel() {
         this.cameraManager = CameraManager.getInstance();
         this.playerCamera = new PlayerCamera(0, 0);
@@ -32,12 +33,22 @@ public class GamePanel implements ILoopPanel {
         this.keyboard = Keyboard.getInstance();
 
         //TODO remove this, and put it in level manager
-        Generator gen = new Superflat();
-        this.level = gen.generate(200, 200);
+        Generator gen = new Checkerboard();
+        this.level = gen.generate(50, 50);
+        GlobalData.setActiveLevel(level);
 
     }
 
     public void paint(Graphics g, JPanel panel) {
+        paintTerrain(g, panel);
+        //draw user as a red box
+        Vector2<Integer> playerCameraPos = cameraManager.CameraToCanvas(playerCamera.getX(), playerCamera.getY());
+        g.setColor(Color.RED);
+        Vector2<Integer> playerCameraGridPos = cameraManager.CameraToGrid(playerCamera.getX(), playerCamera.getY());
+        g.fillRect(playerCameraGridPos.getX(), playerCameraGridPos.getY(), playerCamera.getHitboxWidth(), playerCamera.getHitboxWidth());
+    }
+
+    private void paintTerrain(Graphics g, JPanel panel) {
         Rect<Integer> view = cameraManager.getCameraGridRect();
 
         //checkerboard background
