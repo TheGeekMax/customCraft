@@ -1,15 +1,13 @@
 package dev.toastcie.customcraft.screen;
 
 
+import dev.toastcie.customcraft.data.GlobalData;
 import dev.toastcie.customcraft.keyevents.Keyboard;
 import dev.toastcie.customcraft.screen.panels.GamePanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class MainFrame extends JFrame {
     public static MainFrame instance;
@@ -65,6 +63,21 @@ public class MainFrame extends JFrame {
             }
         });
 
+        //click detection
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (sceneManager != null) {
+                    //get mouse position relative to content panel
+                    Point point = e.getPoint();
+                    Insets insets = getInsets();
+                    int mouseX = point.x - insets.left;
+                    int mouseY = point.y - insets.top;
+                    sceneManager.onClick(mouseX, mouseY);
+                }
+            }
+        });
+
 
         contentPanel = new JPanel() {
             @Override
@@ -86,9 +99,10 @@ public class MainFrame extends JFrame {
         sceneManager.setActiveScene("GAME");
 
         //start game loop timer
-        Timer timer = new Timer(16, e -> {
+        Timer timer = new Timer(1000 / 60, e -> {
             sceneManager.gameLoop();
             contentPanel.repaint();
+            GlobalData.updateTimer();
         });
         timer.start();
     }
