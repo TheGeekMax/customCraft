@@ -29,5 +29,7 @@ public class WaterTile extends ConnectedTile {
                         false
                 )
         );
+
+        this.slowing = true;
     }
 }

@@ -4,7 +4,7 @@ import dev.toastcie.customcraft.data.GlobalData;
 import dev.toastcie.customcraft.keyevents.Keyboard;
 import dev.toastcie.customcraft.level.Generator;
 import dev.toastcie.customcraft.level.Level;
-import dev.toastcie.customcraft.level.generators.Checkerboard;
+import dev.toastcie.customcraft.level.generators.Superflat;
 import dev.toastcie.customcraft.math.Rect;
 import dev.toastcie.customcraft.math.Vector2;
 import dev.toastcie.customcraft.math.Vector2Int;
@@ -22,18 +22,16 @@ public class GamePanel implements ILoopPanel {
     private CameraManager cameraManager;
     private PlayerCamera playerCamera;
     private Keyboard keyboard;
-    private int speed = 10;
-
 
     public GamePanel() {
         this.cameraManager = CameraManager.getInstance();
-        this.playerCamera = new PlayerCamera(0, 0);
+        this.playerCamera = new PlayerCamera(25, 25);
         cameraManager.setPlayerCamera(playerCamera);
 
         this.keyboard = Keyboard.getInstance();
 
         //TODO remove this, and put it in level manager
-        Generator gen = new Checkerboard();
+        Generator gen = new Superflat();
         this.level = gen.generate(50, 50);
         GlobalData.setActiveLevel(level);
 
@@ -100,6 +98,6 @@ public class GamePanel implements ILoopPanel {
     public void loop() {
         Vector2Int direction = keyboard.movements.getDirection();
         //move player camera
-        cameraManager.getInstance().move(direction.getX() * speed, direction.getY() * speed);
+        cameraManager.getInstance().move(direction.getX(), direction.getY(), level);
     }
 }

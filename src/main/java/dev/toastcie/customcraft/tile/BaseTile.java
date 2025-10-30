@@ -11,6 +11,8 @@ public abstract class BaseTile {
 
     public final String id;
     protected final Vector4<ISprite> image;
+    protected boolean walkable = true;
+    protected boolean slowing = false;
 
     public BaseTile(String id, ISprite tl, ISprite tr, ISprite bl, ISprite br) {
         this.id = id;
@@ -25,6 +27,15 @@ public abstract class BaseTile {
         return this.image.map(ISprite::getSprite);
     }
 
+    public boolean isWalkable() {
+        return walkable;
+    }
+
+    public boolean isSlowing() {
+        return slowing;
+    }
+
 
     public abstract void place(Graphics g, Level level, int x, int y, int i, int j);
+
 }

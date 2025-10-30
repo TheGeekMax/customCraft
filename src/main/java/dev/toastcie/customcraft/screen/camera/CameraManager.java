@@ -68,10 +68,10 @@ public class CameraManager {
         calculateCaemeraPosition();
     }
 
-    public void move(int deltaX, int deltaY) {
+    public void move(int deltaX, int deltaY, Level level) {
         if (playercamera == null) return;
 
-        playercamera.move(deltaX, deltaY);
+        playercamera.move(deltaX, deltaY, level);
         calculateCaemeraPosition();
     }
 
@@ -94,5 +94,10 @@ public class CameraManager {
 
     public Vector2<Integer> CameraToGrid(int x, int y) {
         return new Vector2<>(x - cameraX, y - cameraY);
+    }
+
+    public int getPlayerBaseSpeed() {
+        if (playercamera == null) return 0;
+        return playercamera.getBaseSpeed();
     }
 }

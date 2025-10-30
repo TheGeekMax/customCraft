@@ -20,6 +20,8 @@ public class TreeTile extends ConnectedTile {
                         PictureManager.instance.getImage("tree_connected_tl_br")
                 )
         );
+
+        this.walkable = false;
     }
 
 
