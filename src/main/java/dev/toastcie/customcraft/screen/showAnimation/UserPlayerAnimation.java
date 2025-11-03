@@ -26,6 +26,7 @@ public class UserPlayerAnimation implements IPlayerAnimation {
     private BufferedImage rightSpriteWater;
     private BufferedImage waterOverlay;
     private BufferedImage lastSprite;
+    private BufferedImage lastInWaterSprite;
     private boolean isInWater = false;
 
 
@@ -65,13 +66,13 @@ public class UserPlayerAnimation implements IPlayerAnimation {
         if (inWater) {
             // Determine direction and set lastSprite accordingly for water sprites
             if (dx > 0) { // Moving right
-                lastSprite = rightSpriteWater;
+                lastInWaterSprite = rightSpriteWater;
             } else if (dx < 0) { // Moving left
-                lastSprite = leftSpriteWater;
+                lastInWaterSprite = leftSpriteWater;
             } else if (dy > 0) { // Moving down
-                lastSprite = bottomSpriteWater;
+                lastInWaterSprite = bottomSpriteWater;
             } else if (dy < 0) { // Moving up
-                lastSprite = topSpriteWater;
+                lastInWaterSprite = topSpriteWater;
             }
             return;
         }
@@ -96,7 +97,7 @@ public class UserPlayerAnimation implements IPlayerAnimation {
         int yOverlay = y - hitboxOffset;
         if (isInWater) {
             g.drawImage(waterOverlay, xOverlay, yOverlay + (GlobalData.tileWidth / 4), GlobalData.tileWidth, GlobalData.tileWidth / 2, null);
-            g.drawImage(lastSprite, xOverlay, yOverlay, GlobalData.tileWidth, GlobalData.tileWidth / 2, null);
+            g.drawImage(lastInWaterSprite, xOverlay, yOverlay, GlobalData.tileWidth, GlobalData.tileWidth / 2, null);
         } else {
             g.drawImage(lastSprite, xOverlay, yOverlay, GlobalData.tileWidth, GlobalData.tileWidth, null);
         }
