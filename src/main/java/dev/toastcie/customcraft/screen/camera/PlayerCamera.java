@@ -2,25 +2,38 @@ package dev.toastcie.customcraft.screen.camera;
 
 import dev.toastcie.customcraft.data.GlobalData;
 import dev.toastcie.customcraft.level.Level;
+import dev.toastcie.customcraft.math.Vector2;
+import dev.toastcie.customcraft.screen.showAnimation.IPlayerAnimation;
+import dev.toastcie.customcraft.screen.showAnimation.UserPlayerAnimation;
 import dev.toastcie.customcraft.tile.BaseTile;
+
+import java.awt.*;
 
 public class PlayerCamera {
 
-    private final int hitboxWidth = (int) (GlobalData.tileWidth * .8);
+    private final int hitboxWidth = (int) (GlobalData.tileWidth * GlobalData.hitboxScale);
+    IPlayerAnimation MainPlayer;
     private int x;
     private int y;
-
     private int baseSpeed = 8;
     private int diagBaseSpeed = 4;
-
     private int slowSpeed = 4;
     private int diagSlowSpeed = 2;
     private boolean inWater;
 
-
     public PlayerCamera(int startX, int startY) {
         this.x = startX;
         this.y = startY;
+
+
+        MainPlayer = new UserPlayerAnimation("player_up_0", "player_up_1",
+                "player_down_0", "player_down_1",
+                "player_left_0", "player_left_1",
+                "player_right_0", "player_right_1",
+
+                "player_up_water", "player_down_water",
+                "player_left_water", "player_right_water",
+                "water_splash");
     }
 
     public int getX() {
@@ -48,6 +61,7 @@ public class PlayerCamera {
                 (diag ? diagBaseSpeed : baseSpeed);
 
         this.inWater = isSlowing;
+        MainPlayer.move(deltaX, deltaY, inWater);
 
         for (int i = 0; i < curSpeed; i++) {
             int newX = this.x + Integer.signum(deltaX);
@@ -114,5 +128,11 @@ public class PlayerCamera {
 
     public int getBaseSpeed() {
         return baseSpeed;
+    }
+
+    public void paint(Graphics g) {
+        //calculate player pos on canvas
+        Vector2<Integer> pos = CameraManager.getInstance().CameraToGrid(x, y);
+        MainPlayer.draw(g, pos.getX(), pos.getY());
     }
 }

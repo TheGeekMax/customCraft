@@ -6,6 +6,8 @@ import dev.toastcie.customcraft.math.Rect;
 import dev.toastcie.customcraft.math.Vector2;
 import dev.toastcie.customcraft.screen.MainFrame;
 
+import java.awt.*;
+
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -99,5 +101,11 @@ public class CameraManager {
     public int getPlayerBaseSpeed() {
         if (playercamera == null) return 0;
         return playercamera.getBaseSpeed();
+    }
+
+    public void showEntities(Graphics g) {
+        if (playercamera == null) return;
+
+        playercamera.paint(g);
     }
 }

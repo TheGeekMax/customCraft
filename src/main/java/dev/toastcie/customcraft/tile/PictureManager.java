@@ -117,5 +117,21 @@ public class PictureManager {
                 new Rect<>(160, 0, 8, 8),
                 new Rect<>(136, 0, 8, 8),
                 new Rect<>(152, 0, 8, 8));
+
+        //player
+        addStaticImage("player_down_0", new Rect<>(0, 112, 16, 16));
+        addStaticImage("player_down_1", new Rect<>(0, 128, 16, 16));
+        addStaticImage("player_up_0", new Rect<>(16, 112, 16, 16));
+        addStaticImage("player_up_1", new Rect<>(16, 128, 16, 16));
+        addStaticImage("player_right_0", new Rect<>(32, 112, 16, 16));
+        addStaticImage("player_right_1", new Rect<>(48, 112, 16, 16));
+        addStaticImage("player_left_0", new Rect<>(32, 128, 16, 16));
+        addStaticImage("player_left_1", new Rect<>(48, 128, 16, 16));
+
+        addStaticImage("player_down_water", new Rect<>(0, 112, 16, 8));
+        addStaticImage("player_up_water", new Rect<>(16, 112, 16, 8));
+        addStaticImage("player_right_water", new Rect<>(32, 112, 16, 8));
+        addStaticImage("player_left_water", new Rect<>(32, 128, 16, 8));
+        addStaticImage("water_splash", new Rect<>(32, 104, 16, 8));
     }
 }

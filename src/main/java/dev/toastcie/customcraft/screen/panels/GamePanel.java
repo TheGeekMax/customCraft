@@ -41,9 +41,7 @@ public class GamePanel implements ILoopPanel {
         paintTerrain(g, panel);
         //draw user as a red box
         Vector2<Integer> playerCameraPos = cameraManager.CameraToCanvas(playerCamera.getX(), playerCamera.getY());
-        g.setColor(Color.RED);
-        Vector2<Integer> playerCameraGridPos = cameraManager.CameraToGrid(playerCamera.getX(), playerCamera.getY());
-        g.fillRect(playerCameraGridPos.getX(), playerCameraGridPos.getY(), playerCamera.getHitboxWidth(), playerCamera.getHitboxWidth());
+        cameraManager.showEntities(g);
     }
 
     private void paintTerrain(Graphics g, JPanel panel) {
