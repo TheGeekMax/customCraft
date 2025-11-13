@@ -1,5 +1,6 @@
 package dev.toastcie.customcraft.screen.panels;
 
+import dev.toastcie.customcraft.annotations.screen.LoopPanel;
 import dev.toastcie.customcraft.data.GlobalData;
 import dev.toastcie.customcraft.keyevents.Keyboard;
 import dev.toastcie.customcraft.level.Generator;
@@ -16,6 +17,7 @@ import dev.toastcie.customcraft.tile.TileAtlas;
 import javax.swing.*;
 import java.awt.*;
 
+@LoopPanel("GAME")
 public class GamePanel implements ILoopPanel {
 
     public Level level;

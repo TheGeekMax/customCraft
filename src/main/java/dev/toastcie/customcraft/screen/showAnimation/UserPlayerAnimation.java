@@ -38,6 +38,7 @@ public class UserPlayerAnimation implements IPlayerAnimation {
                                String topSpriteWaterPath, String bottomSpriteWaterPath,
                                String leftSpriteWaterPath, String rightSpriteWaterPath,
                                String waterOverlayPath) {
+
         //load sprites from paths
         topSprite_0 = PictureManager.instance.getImage(topSpritePath_0).getSprite();
         topSprite_1 = PictureManager.instance.getImage(topSpritePath_1).getSprite();
@@ -54,7 +55,6 @@ public class UserPlayerAnimation implements IPlayerAnimation {
         leftSpriteWater = PictureManager.instance.getImage(leftSpriteWaterPath).getSprite();
         rightSpriteWater = PictureManager.instance.getImage(rightSpriteWaterPath).getSprite();
         waterOverlay = PictureManager.instance.getImage(waterOverlayPath).getSprite();
-
 
         lastSprite = bottomSprite_0;
     }

@@ -1,6 +1,8 @@
 package dev.toastcie.customcraft.screen;
 
+import dev.toastcie.customcraft.annotations.screen.LoopPanel;
 import dev.toastcie.customcraft.screen.panels.ILoopPanel;
+import io.github.classgraph.ClassGraph;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +15,27 @@ class SceneManager {
 
     public SceneManager() {
         scenes = new Hashtable<>();
+
+        //get all classes with LoopPanel annotation
+        var scanResult = new ClassGraph()
+                .enableAllInfo()
+                .acceptPackages("dev.toastcie.customcraft.screen.panels")
+                .scan();
+        var classes = scanResult.getClassesWithAnnotation(LoopPanel.class.getName());
+        for (var classInfo : classes) {
+            try {
+                Class<?> cls = Class.forName(classInfo.getName());
+                LoopPanel annotation = cls.getAnnotation(LoopPanel.class);
+                String sceneName = annotation.value();
+                ILoopPanel sceneInstance = (ILoopPanel) cls.getDeclaredConstructor().newInstance();
+                addScene(sceneName, sceneInstance);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public void addScene(String name, ILoopPanel scene) {
+    private void addScene(String name, ILoopPanel scene) {
         scenes.put(name, scene);
     }
 
