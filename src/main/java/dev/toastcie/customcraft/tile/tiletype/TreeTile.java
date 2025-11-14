@@ -1,9 +1,11 @@
 package dev.toastcie.customcraft.tile.tiletype;
 
+import dev.toastcie.customcraft.annotations.tile.TileInformation;
 import dev.toastcie.customcraft.tile.ConnectedTile;
 import dev.toastcie.customcraft.tile.PictureManager;
 import dev.toastcie.customcraft.tile.rules.TileRules;
 
+@TileInformation("TREE_TILE")
 public class TreeTile extends ConnectedTile {
     public TreeTile() {
         super(

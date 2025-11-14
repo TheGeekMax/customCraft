@@ -12,15 +12,15 @@ public class Superflat extends Generator {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                level.setBackgroundTile(x, y, TileAtlas.GRASS_TILE);
+                level.setBackgroundTile(x, y, TileAtlas.get("WATER_TILE"));
             }
         }
 
         //TODO supprimer
-        BaseTile G = TileAtlas.GRASS_TILE;
-        BaseTile F = TileAtlas.FLOWER_TILE;
-        BaseTile T = TileAtlas.TREE_TILE;
-        BaseTile W = TileAtlas.WATER_TILE;
+        BaseTile G = TileAtlas.get("GRASS_TILE");
+        BaseTile F = TileAtlas.get("FLOWER_TILE");
+        BaseTile T = TileAtlas.get("TREE_TILE");
+        BaseTile W = TileAtlas.get("WATER_TILE");
         BaseTile E = null;
 
 

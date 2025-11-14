@@ -1,9 +1,11 @@
 package dev.toastcie.customcraft.tile.tiletype;
 
+import dev.toastcie.customcraft.annotations.tile.TileInformation;
 import dev.toastcie.customcraft.tile.ConnectedTile;
 import dev.toastcie.customcraft.tile.PictureManager;
 import dev.toastcie.customcraft.tile.rules.TileRules;
 
+@TileInformation("GRASS_TILE")
 public class GrassTile extends ConnectedTile {
     public GrassTile() {
         super("grass",

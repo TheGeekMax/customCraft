@@ -12,9 +12,9 @@ public class Checkerboard extends Generator {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if ((x + y) % 2 == 0)
-                    level.setBackgroundTile(x, y, TileAtlas.WATER_TILE);
+                    level.setBackgroundTile(x, y, TileAtlas.get("WATER_TILE"));
                 else
-                    level.setBackgroundTile(x, y, TileAtlas.GRASS_TILE);
+                    level.setBackgroundTile(x, y, TileAtlas.get("GRASS_TILE"));
             }
         }
 
