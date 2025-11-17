@@ -1,6 +1,8 @@
 package dev.toastcie.customcraft.screen.camera;
 
 import dev.toastcie.customcraft.data.GlobalData;
+import dev.toastcie.customcraft.entities.Player;
+import dev.toastcie.customcraft.items.Wood;
 import dev.toastcie.customcraft.level.Level;
 import dev.toastcie.customcraft.math.Vector2;
 import dev.toastcie.customcraft.screen.showAnimation.IPlayerAnimation;
@@ -13,6 +15,10 @@ public class PlayerCamera {
 
     private final int hitboxWidth = (int) (GlobalData.tileWidth * GlobalData.hitboxScale);
     IPlayerAnimation MainPlayer;
+    // for user related data
+    Player player;
+
+    //other
     private int x;
     private int y;
     private int baseSpeed = 8;
@@ -34,6 +40,11 @@ public class PlayerCamera {
                 "player_up_water", "player_down_water",
                 "player_left_water", "player_right_water",
                 "water_splash");
+
+        player = new Player();
+
+        player.addItem(new Wood(), 5);
+        player.addItem(new Wood(), 3);
     }
 
     public int getX() {

@@ -133,5 +133,9 @@ public class PictureManager {
         addStaticImage("player_right_water", new Rect<>(32, 112, 16, 8));
         addStaticImage("player_left_water", new Rect<>(32, 128, 16, 8));
         addStaticImage("water_splash", new Rect<>(32, 104, 16, 8));
+
+        //basics items
+        addStaticImage("flowers_item", new Rect<>(0, 32, 8, 8));
+
     }
 }
